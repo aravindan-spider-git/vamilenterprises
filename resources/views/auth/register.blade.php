@@ -93,20 +93,5 @@
     }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    // Toggle password visibility
-    $(document).ready(function(){
-        $(".toggle-password").click(function() {
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") === "password") {
-                input.attr("type", "text");
-                $(this).removeClass("fa-eye").addClass("fa-eye-slash");
-            } else {
-                input.attr("type", "password");
-                $(this).removeClass("fa-eye-slash").addClass("fa-eye");
-            }
-        });
-    });
-</script>
+
 @endsection

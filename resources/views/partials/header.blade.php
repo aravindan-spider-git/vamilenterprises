@@ -3,27 +3,26 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <!-- Full-width flex container to center everything -->
-                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100">
+                <div class="d-flex justify-content-between align-items-center w-100">
 
-                    <!-- Brand Title -->
-                    <div class="text-center mb-2 mb-lg-0">
-                        <h1 class="brand-title text-black fw-bold mb-0 text-center" style="font-size: calc(1.5rem + 0.8vw);">
+                    <!-- Centered Brand Title -->
+                    <div class="mx-auto text-center mb-2 mb-lg-0">
+                        <h1 class="brand-title text-black fw-bold mb-0" style="font-size: calc(1.5rem + 0.8vw);">
                             Vamil Enterprises
                         </h1>
                     </div>
 
                     <!-- Profile Dropdown -->
-                    <div>
+                    <div class="ml-auto">
                         <ul class="navbar-nav header-right main-notification">
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link d-flex align-items-center gap-2" href="#" role="button" data-toggle="dropdown">
                                     <img src="{{ asset('images/profile/pic1.jpg') }}" width="30" height="30" class="rounded-circle" alt=""/>
                                     <div class="header-info d-none d-sm-block">
-                                        {{-- <small>{{ $authUser->name ?? 'Guest' }}</small> --}}
+                                        <small>{{ Auth::user()->name ?? 'Guest' }}</small>
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                   
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                        class="dropdown-item ai-icon">

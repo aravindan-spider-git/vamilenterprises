@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','category_id'];
 
-    public function categories()
-{
-    return $this->hasMany(CompanyCategory::class);
-}
+    public function category()
+    {
+        return $this->belongsTo(CompanyCategory::class);
+    }
 
 }

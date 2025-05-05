@@ -134,11 +134,11 @@
 	
 	//ListDatatableView
 	var table = $('#ListDatatableView').DataTable({
-		searching: false,
+		searching: true,
 		paging:true,
-		select: false,
-		//info: false,         
-		lengthChange:false ,
+		select: true,
+		info: true,         
+		lengthChange:true ,
 		language: {
 			paginate: {
 			  next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',

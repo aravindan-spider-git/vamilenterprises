@@ -15,6 +15,7 @@ color:black;
 }
 
 
+
 /*
     Table of Contents
 
@@ -12598,7 +12599,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
           color: var(--primary);
           font-weight: 100; }
         .deznav .metismenu > li.mm-active > a g [fill] {
-          fill: var(--primary); }
+          fill: #8088a1;}
       [data-sidebar-style="compact"] .deznav .metismenu > li.mm-active > a i {
         background: var(--rgba-primary-1);
         color: var(--primary); }

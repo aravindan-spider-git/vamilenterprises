@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyCategoryController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\VehicleCategoryController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DocumentCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('companies', CompanyController::class);
     Route::resource('company-categories', CompanyCategoryController::class);
     Route::resource('vehicles', VehicleController::class);
+    Route::resource('vehicle-categories', VehicleCategoryController::class);
+    Route::resource('documents', DocumentController::class);
+    Route::resource('document-categories', DocumentCategoryController::class);
 
+
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

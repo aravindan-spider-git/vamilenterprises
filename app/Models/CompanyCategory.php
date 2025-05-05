@@ -10,13 +10,12 @@ class CompanyCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'company_id',
+        'name'
     ];
 
     // Each category belongs to one company
-    public function company()
+    public function companies()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasMany(Company::class);
     }
 }

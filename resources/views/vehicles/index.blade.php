@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -15,14 +14,14 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table style-1" id="ListDatatableView">
                             <thead>
                                 <tr>
                                     <th>S.No</th>
                                     <th>Name</th>
                                     <th>Registration No.</th>
-                  
                                     <th>Status</th>
+                                    <th>Category</th>
                                     <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
@@ -33,16 +32,15 @@
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $vehicle->name }}</td>
                                         <td>{{ $vehicle->registration_number }}</td>
-                
                                         <td>{{ $vehicle->status }}</td>
+                                        <td>{{ $vehicle->category->name ?? '-' }}</td>
                                         <td>
                                             @if($vehicle->image)
                                                 <img src="{{ asset('storage/' . $vehicle->image) }}" alt="Image" width="60">
                                             @endif
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning" onclick="openEditVehicleModal({{ $vehicle }})">Edit</button>
-
+                                            <button class="btn btn-sm btn-warning" onclick='openEditVehicleModal(@json($vehicle))'>Edit</button>
                                             <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" style="display:inline-block">
                                                 @csrf @method('DELETE')
                                                 <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this vehicle?')">Delete</button>
@@ -50,7 +48,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                                 @if($vehicles->isEmpty())
                                     <tr><td colspan="10" class="text-center">No vehicles found.</td></tr>
                                 @endif
@@ -58,7 +55,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -94,6 +90,15 @@
                         </select>
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" name="category_id" id="vehicleCategory" required>
+                            <option value="" disabled selected>Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
                         <label class="form-label">Purchase Date</label>
                         <input type="date" class="form-control" name="purchase_date" id="vehicleDate">
                     </div>
@@ -111,26 +116,28 @@
     </div>
 </div>
 
+<!-- Scripts -->
 <script>
     function openCreateVehicleModal() {
         document.getElementById('vehicleModalLabel').innerText = 'Add Vehicle';
         document.getElementById('vehicleForm').action = "{{ route('vehicles.store') }}";
         document.getElementById('formMethod').value = 'POST';
-        // Clear fields
         document.getElementById('vehicleForm').reset();
         document.getElementById('vehicleId').value = '';
+        document.getElementById('vehicleCategory').value = '';
     }
 
     function openEditVehicleModal(vehicle) {
+        
         document.getElementById('vehicleModalLabel').innerText = 'Edit Vehicle';
         document.getElementById('vehicleForm').action = "/vehicles/" + vehicle.id;
         document.getElementById('formMethod').value = 'PUT';
 
-        // Populate fields
         document.getElementById('vehicleId').value = vehicle.id;
         document.getElementById('vehicleName').value = vehicle.name;
         document.getElementById('vehicleReg').value = vehicle.registration_number;
         document.getElementById('vehicleStatus').value = vehicle.status;
+        document.getElementById('vehicleCategory').value = vehicle.category_id ?? '';
         document.getElementById('vehicleDate').value = vehicle.purchase_date ?? '';
 
         new bootstrap.Modal(document.getElementById('vehicleModal')).show();
